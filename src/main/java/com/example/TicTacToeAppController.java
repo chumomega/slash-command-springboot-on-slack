@@ -69,9 +69,13 @@ public class TicTacToeAppController {
 	      slackCommand.setCommand(request.getParameter("command"));
 	      slackCommand.setText(request.getParameter("text"));
 	      slackCommand.setResponseUrl(request.getParameter("response_url"));
-
 	      
-	      return "Hello, this should be the path for the slashcommand";
+	      StringBuilder x=new StringBuilder();
+	      x.append(slackCommand.getUserName());
+	      x.append(" ");
+	      x.append(slackCommand.getUserId());
+	      
+	      return "Person who called the Tic Tac Toe App: " + x.toString();
 	  }
 	  
 
