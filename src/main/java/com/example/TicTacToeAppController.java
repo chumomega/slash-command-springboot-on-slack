@@ -71,14 +71,14 @@ public class TicTacToeAppController {
 
 	      x.append(slackCommand.getUserName());
 	      x.append(" ");
-	      x.append(slackCommand.getTriggerId());
-	      x.append(" ");
 	      x.append(slackCommand.getUserId());
+	      
 	      
 	      if (!StringUtils.hasText(slackCommand.getText())){ 
 	    	  return "Please include the username of the person you are challenging";
 	       }
 	      else {
+	    	  x.append(slackCommand.getText());
 		      return "Person who called the Tic Tac Toe App: " + x.toString();
 	      }
 	      
