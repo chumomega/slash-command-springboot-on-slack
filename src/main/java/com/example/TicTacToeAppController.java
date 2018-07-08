@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -74,13 +75,14 @@ public class TicTacToeAppController {
 	      x.append(" ");
 	      x.append(slackCommand.getUserId());
 	      
-	      if(slackCommand.getText()==null) {
+	      if (!StringUtils.hasText(slackCommand.getText())){ 
 	    	  return "Please include the username of the person you are challenging";
+	       }
+	      else {
+		      return "Person who called the Tic Tac Toe App: " + x.toString();
 	      }
 	      
 	      
-	      
-	      return "Person who called the Tic Tac Toe App: " + x.toString();
 	  }
 	  
 
