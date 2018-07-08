@@ -72,6 +72,7 @@ public class TicTacToeAppController {
 	      x.append(slackCommand.getUserName());
 	      x.append(" ");
 	      x.append(slackCommand.getUserId());
+	      x.append(" ");
 	      
 	      
 	      if (!StringUtils.hasText(slackCommand.getText())){ 
