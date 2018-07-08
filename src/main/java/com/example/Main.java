@@ -73,6 +73,11 @@ public class Main {
       return "error";
     }
   }
+  
+  @RequestMapping("/hello")
+  String hello() {
+      return "Hello world. This is tic tac toe";
+  }
 
   @Bean
   public DataSource dataSource() throws SQLException {
