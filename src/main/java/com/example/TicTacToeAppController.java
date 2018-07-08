@@ -59,21 +59,26 @@ public class TicTacToeAppController {
 	  @ResponseStatus(value = HttpStatus.OK)
 	  public String ttt(HttpServletRequest request){
 		  final SlackCommand slackCommand = new SlackCommand();
-	      slackCommand.setToken(request.getParameter("token"));
-	      slackCommand.setTeamId(request.getParameter("team_id"));
-	      slackCommand.setTeamDomain(request.getParameter("team_domain"));
-	      slackCommand.setChannelId(request.getParameter("channel_id"));
-	      slackCommand.setChannelName(request.getParameter("channel_name"));
-	      slackCommand.setUserId(request.getParameter("user_id"));
-	      slackCommand.setUserName(request.getParameter("user_name"));
-	      slackCommand.setCommand(request.getParameter("command"));
-	      slackCommand.setText(request.getParameter("text"));
-	      slackCommand.setResponseUrl(request.getParameter("response_url"));
+		  
 	      
+		  slackCommand.setUserId(request.getParameter("user_id"));
+		  slackCommand.setUserName(request.getParameter("user_name"));
+		  slackCommand.setText(request.getParameter("text"));
+		  slackCommand.setTriggerId(request.getParameter("trigger_id"));
+		  
 	      StringBuilder x=new StringBuilder();
+
 	      x.append(slackCommand.getUserName());
 	      x.append(" ");
+	      x.append(slackCommand.getTriggerId());
+	      x.append(" ");
 	      x.append(slackCommand.getUserId());
+	      
+	      if(slackCommand.getText()==null) {
+	    	  return "Please include the username of the person you are challenging";
+	      }
+	      
+	      
 	      
 	      return "Person who called the Tic Tac Toe App: " + x.toString();
 	  }
