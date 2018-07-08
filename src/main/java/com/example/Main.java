@@ -23,10 +23,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -80,8 +84,23 @@ public class Main {
       return "Hello world. This is tic tac toe";
   }
   
-  @RequestMapping(path="/ttt", method=RequestMethod.POST)
-  String ttt() {
+  @RequestMapping(value="/ttt", method=RequestMethod.POST, consumes ="application/x-www-form-urlencoded")
+  @ResponseBody
+  @ResponseStatus(value = HttpStatus.OK)
+  public String ttt(HttpServletRequest request){
+	  final SlackCommand slackCommand = new SlackCommand();
+      slackCommand.setToken(request.getParameter("token"));
+      slackCommand.setTeamId(request.getParameter("team_id"));
+      slackCommand.setTeamDomain(request.getParameter("team_domain"));
+      slackCommand.setChannelId(request.getParameter("channel_id"));
+      slackCommand.setChannelName(request.getParameter("channel_name"));
+      slackCommand.setUserId(request.getParameter("user_id"));
+      slackCommand.setUserName(request.getParameter("user_name"));
+      slackCommand.setCommand(request.getParameter("command"));
+      slackCommand.setText(request.getParameter("text"));
+      slackCommand.setResponseUrl(request.getParameter("response_url"));
+
+      
       return "Hello, this should be the path for the slashcommand";
   }
   
@@ -96,5 +115,7 @@ public class Main {
       return new HikariDataSource(config);
     }
   }
+  
+  
 
 }
