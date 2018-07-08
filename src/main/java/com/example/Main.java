@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -78,6 +79,12 @@ public class Main {
   String hello() {
       return "Hello world. This is tic tac toe";
   }
+  
+  @RequestMapping(path="/ttt", method=RequestMethod.POST)
+  String ttt() {
+      return "Hello, this should be the path for the slashcommand";
+  }
+  
 
   @Bean
   public DataSource dataSource() throws SQLException {
