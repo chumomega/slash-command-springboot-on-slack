@@ -61,6 +61,7 @@ public class TicTacToeAppController {
 	  public String ttt(HttpServletRequest request){
 		  final SlackCommand slackCommand = new SlackCommand();
 		  
+		  
 	      
 		  slackCommand.setUserId(request.getParameter("user_id"));
 		  slackCommand.setUserName(request.getParameter("user_name"));
@@ -79,8 +80,20 @@ public class TicTacToeAppController {
 	    	  return "Please include the username of the person you are challenging";
 	       }
 	      else {
+	    	  
+	    	  GameBoard board1=new GameBoard(request.getParameter("user_name"),request.getParameter("text").substring(1));
+		      
+	    	  
+	    	/*  display(array);
+	    	    while(!checkforwin(array)){
+	    	        getamove(num1,spot1,array,used);
+	    	        playamove(num1,spot1,array,used);
+	    	    }
+	    	    cout<<"Congrats, you win!!"<<endl<<endl;*/
+	    	  
+	    	  
 	    	  x.append(slackCommand.getText());
-		      return "Person who called the Tic Tac Toe App: " + x.toString();
+		      return "Person who called the Tic Tac Toe App: " + x.toString() + "\n" + "\n" +board1.displayBoard();
 	      }
 	      
 	      
