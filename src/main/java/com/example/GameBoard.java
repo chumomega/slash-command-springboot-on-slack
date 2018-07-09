@@ -2,11 +2,8 @@ package com.example;
 
 public class GameBoard {
 	private String[][] board=new String[3][3];
-	private String user1, user2;
 	
-	public GameBoard( String user1, String user2) {
-		this.user1=user1;
-		this.user2=user2;
+	public GameBoard() {
 		
 		for(int i=0; i<3; i++) {
 			for(int j=0; j<3; j++) {
@@ -15,15 +12,14 @@ public class GameBoard {
 		}
 	}
 	
-	public void playAmove(int row, int col, String userName) {
-		if(userName==user1 && board[row][col]!="_") {
-			board[row][col]="X";
-		}
-		else if(userName==user2 && board[row][col]!="_") {
-			board[row][col]="O";
+	//returns true or false if successful
+	public boolean playAmove(int row, int col, String marker) {
+		if(board[row][col]!="_") {
+			board[row][col]=marker;
+			return true;
 		}
 		else {
-			System.out.println("Bad move");
+			return false;
 		}		
 	}
 	
